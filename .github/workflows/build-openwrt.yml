@@ -43,6 +43,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
+        df -hT $PWD
         sudo -E apt-get update -y
         sudo -E apt-get full-upgrade -y
         sudo -E apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
