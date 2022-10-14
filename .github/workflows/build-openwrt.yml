@@ -18,6 +18,10 @@ on:
         description: 'SSH connection to Actions'
         required: true
         default: 'false'
+      num_thread:
+        description: 'Number of compile thread'
+        required: true
+        default: '4'
 
 env:
   REPO_URL: https://github.com/padavanonly/immortalwrtmt7622
@@ -94,7 +98,7 @@ jobs:
         cd openwrt
         make defconfig
         echo -e "2 thread compile"
-        make FORCE_UNSAFE_CONFIGURE=1 -j4
+        make FORCE_UNSAFE_CONFIGURE=1 -j$num_thread
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
