@@ -132,7 +132,7 @@ jobs:
         title: ${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         prerelease: false
         files: |
-          artifacts/packages/*
+          ${{ env.FIRMWARE }}/*sysupgrade.bin
 
 
     - name: Delete workflow runs
